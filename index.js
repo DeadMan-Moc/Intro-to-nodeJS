@@ -24,6 +24,7 @@ class Visitor {
     }
 
     load(iterator){
+        iterator = this.full_name.toLowerCase().replace(" ","_")
         let file = fs.readFile(`visitor_${iterator}`, 'utf-8')
         console.log(file);      
     }
