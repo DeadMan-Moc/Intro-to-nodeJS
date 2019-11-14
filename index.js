@@ -11,6 +11,28 @@ class Visitor {
     }
 
     save() {
+
+        var i;
+         i = 0;
+
+         while (fs.existsSync(`visitor_${i}.json`)) {
+             console.log(`this file visitor_${i}.json already exist!`);
+            //  break;
+            i++;
+
+         }
+
+        // do{i++}while(fs.exists(`visitor_${i}.json`));
+ 
+         var write_info = `visitor_${i}.json`;
+         fs.writeFile(write_info, jsonContent, function (err) {
+             if (err)
+                 throw err;
+             console.log('is now Saved!');
+             return true;
+         });
+ 
+
         let names = this.full_name.toLowerCase().replace(" ","_")
 
         var jsonContent = JSON.stringify(this, null, 4)
@@ -24,9 +46,26 @@ class Visitor {
     }
 
     load(iterator){
-        iterator = this.full_name.toLowerCase().replace(" ","_")
-        let file = fs.readFile(`visitor_${iterator}`, 'utf-8')
-        console.log(file);      
+    
+        if(isNaN(iterator)){
+
+            console.log("hey");
+            
+            iterator = this.full_name.replace(' ', '_').toLowerCase();
+            var strFile = fs.readFileSync(`visitor_${iterator}.json`, 'utf8');
+            console.log(strFile);
+            
+        }else{
+
+        var strFile = fs.readFileSync(`visitor_${iterator}.json`, 'utf8');
+        console.log(strFile);
+        
+        }
+
+        // var strFile = fs.readFileSync(`visitor_${args}.json`, 'utf8');
+        // console.log(strFile);
+
+
     }
 }
 
